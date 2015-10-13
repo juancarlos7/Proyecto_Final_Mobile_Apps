@@ -12,4 +12,11 @@ public class JobPostDbContract {
         public static final String DESCRIPTION_COLUMN = "description";
         public static final String POSTED_DATE_COLUMN = "posted_date";
     }
+
+    public static class Contact implements BaseColumns {
+        public static final String TABLE_NAME = "contacts";
+
+        public static final String NUMBER_COLUMN = "number";
+        public static final String JOB_POST_ID_COLUMN = "job_post_id";
+    }
 }

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.works_list_view);
         ArrayList<String> arrayList = new ArrayList<>();
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.job_post_element,
+
                                                 R.id.content_text_view, arrayList);
         listView.setAdapter(arrayAdapter);
     }
@@ -107,6 +108,19 @@ public class MainActivity extends AppCompatActivity {
                     contentValues.put(JobPost.DESCRIPTION_COLUMN, description);
 
                     db.insert(JobPost.TABLE_NAME, null, contentValues);
+
+                    JSONArray contacts = element.getJSONArray("contacts");
+
+                    for (int j = 0; j < contacts.length(); j++) {
+                        String number = contacts.getString(j);
+
+                        ContentValues contactContentValues = new ContentValues();
+
+                        contactContentValues.put(Contact.NUMBER_COLUMN, number);
+                        contactContentValues.put(Contact.JOB_POST_ID_COLUMN, id);
+
+                        db.insert(Contact.TABLE_NAME, null, contactContentValues);
+                    }
                 }
             } catch (IOException e) {
 
